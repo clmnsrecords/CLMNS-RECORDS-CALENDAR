@@ -86,7 +86,7 @@ z-index:0;
   .mobile-utility-bar button.gray{grid-column:1/-1}
 }
 
-@media(max-width:950px){.popover{display:none!important}.day.selected-day{outline:3px solid #3b82f6!important;outline-offset:-4px!important}}
+@media(max-width:600px){.popover{display:none!important}.day.selected-day{outline:3px solid #3b82f6!important;outline-offset:-4px!important}}
 
   </style>
 
@@ -195,10 +195,10 @@ function hapticPulse(key){
   if(el){ el.classList.remove('haptic-pulse'); void el.offsetWidth; el.classList.add('haptic-pulse'); setTimeout(()=>el.classList.remove('haptic-pulse'),320); }
 }
 function showMobileActionBar(label='Selecciona los días'){
+  if(!isTouchDevice()) return;
   const bar=document.getElementById('mobileActionBar');
   const lab=document.getElementById('mobileActionLabel');
   if(!bar) return;
-  // No mostrar la barra extra si no hay días seleccionados.
   if(!selectedKeys.length){ bar.classList.remove('show'); return; }
   if(lab) lab.textContent=label;
   bar.classList.add('show');
