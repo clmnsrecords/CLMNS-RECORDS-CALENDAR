@@ -314,7 +314,6 @@ function handleTouchEnd(e){
 }
 function handleTouchCancel(){clearTimeout(touchTimer);touchAnchorKey=null;touchMode=null;touchDidScroll=false;setTimeout(()=>ignoreNextClick=false,250);}
 function showPopover(e,key){
-  if(isTouchDevice()) return;
   const p=document.getElementById('popover');
   if(popoverOpen && lastPopoverKey===key){p.style.display='none';popoverOpen=false;lastPopoverKey=null;clearSelection();selectedKeys=[];return;}
   p.style.display='block';
@@ -342,7 +341,8 @@ function handleDayClick(e,key){
     anchorKey=key;
   } else {selectedKeys=[key];anchorKey=key;}
   paintSelection();
-  if(isTouchDevice()) showMobileActionBar(`${selectedKeys.length} día seleccionado`); else showPopover(e,key);
+  if(isTouchDevice()) showMobileActionBar(`${selectedKeys.length} día seleccionado`);
+  if(!isTouchDevice()) showPopover(e,key);
 }
 function setSelectedDay(status){
   if(!selectedKeys.length)return;
